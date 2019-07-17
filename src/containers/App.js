@@ -1,10 +1,12 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import ListScreen from '../screens/ListScreen';
 
-function App(props) {
+function App() {
   return (
-    <div>
-      Pokedex
-    </div>
+    <Router>
+      <Route path="/" component={ListScreen} />
+    </Router>
   );
 }
 
