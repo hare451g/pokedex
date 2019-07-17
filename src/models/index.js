@@ -1,3 +1,3 @@
-export const pokemon = {
-  state: {},
-};
+import pokemonModel from './pokemon';
+
+export const pokemon = pokemonModel;
