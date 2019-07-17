@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import { Avatar } from '@material-ui/core';
+
 class PokemonList extends React.Component {
   componentDidMount() {
     const {
@@ -18,30 +25,33 @@ class PokemonList extends React.Component {
       isLoading,
       error,
       results,
-      count,
     } = this.props;
 
     if (error) {
       return (
-        <div>Something went wrong</div>
+        <Paper>Something went wrong</Paper>
       );
     }
 
     if (isLoading) {
       return (
-        <div>Loading contents . . .</div>
+        <Paper>Loading contents . . .</Paper>
       );
     }
 
     if (results && results.length >= 1) {
       return (
         <div>
-          <p>Total registered: {count}</p>
-          <ul>
-            {results.map(({name, url}) => (
-              <li key={url}>{name}</li>
+          <List>
+            {results.map(({name, url, id, avatar}) => (
+              <ListItem key={id} button>
+                <ListItemAvatar>
+                  <Avatar alt={name} src={avatar}/>
+                </ListItemAvatar>
+                <ListItemText primary={name} />
+              </ListItem>
             ))}
-          </ul>
+          </List>
         </div>
       )
     }
