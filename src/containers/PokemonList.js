@@ -18,8 +18,6 @@ class PokemonList extends React.Component {
       isLoading,
       error,
       results,
-      next,
-      prev,
       count,
     } = this.props;
 
@@ -41,7 +39,7 @@ class PokemonList extends React.Component {
           <p>Total registered: {count}</p>
           <ul>
             {results.map(({name, url}) => (
-              <li>{name}</li>
+              <li key={url}>{name}</li>
             ))}
           </ul>
         </div>
