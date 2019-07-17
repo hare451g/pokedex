@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { BASE_API_URL } from "../constants/api";
+import { BASE_API_URL, BASE_SPRITE_URL } from "../constants/api";
 
 export default ({
   state: {
@@ -49,11 +49,17 @@ export default ({
       
       try {
         const response = await Axios.get(targetUrl);
-        dispatch.pokemon.fetchSuccess(response.data);
+        const composedResults = response.data.results.map(result => {
+          // extract ID
+          const parts = result.url.split('/');
+          const id = parts[parts.length - 2];
+          return ({ ...result, avatar: `${BASE_SPRITE_URL}/${id}.png`, id, });
+        })
+        // Dispatch Success
+        dispatch.pokemon.fetchSuccess({ ...response.data, results: composedResults});
       } catch (err) {
         dispatch.pokemon.fetchFailed({ error: err });
       }
-
     }
   })
 });
