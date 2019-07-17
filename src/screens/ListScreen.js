@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import PokemonList from '../containers/PokemonList';
+import SearchAppBar from '../components/SearchAppBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,7 +14,7 @@ const ListScreen = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <h1>Pokedex</h1>
+      <SearchAppBar />
       <Grid>
         <Grid xs={12}>
           <PokemonList />
