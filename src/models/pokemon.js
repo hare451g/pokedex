@@ -21,7 +21,7 @@ export default ({
     fetchSuccess: (state, payload) => ({
       ...state,
       ...payload,
-      results: [...state.results, ],
+      results: [...state.results, ...payload.results],
       isLoading: false,
       error: undefined,
     }),
