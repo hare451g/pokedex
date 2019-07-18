@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import PokemonContainer from '../containers/PokemonContainer';
-import NavigationBar from '../components/NavigationBar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import ResponsiveDrawer from '../components/ResponsiveDrawer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,14 +17,17 @@ const ListScreen = (props) => {
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:600px)');
 
+  const {filterType, slug} = props.match.params;
+
   return (
     <div className={classes.root}>
-      <NavigationBar />
-      <Grid className={classes.pokemonGrid} container>
-        <Grid xs={12} item>
-          <PokemonContainer isSmallScreen={matches} />
-        </Grid>
-      </Grid>
+      <ResponsiveDrawer>
+        <PokemonContainer
+          isSmallScreen={matches}
+          filterType={filterType}
+          slug={slug}
+        />
+      </ResponsiveDrawer>
     </div>
   );
 }
