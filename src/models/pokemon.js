@@ -42,15 +42,18 @@ export default ({
       const { id, next, filterType, slug } = payload;
       if (filterType) {
         targetUrl += `/${filterType}/${slug}`
-      } else 
-      
-      if (next) {
+      } else if (next) {
         targetUrl = next;
       }
       
       try {
         const response = await Axios.get(targetUrl);
-        const composedResults = response.data.pokemon_species.map(result => {
+
+        const resultKey = filterType === 'pokemon-species'
+          ? 'results'
+          : 'pokemon_species'
+
+        const composedResults = response.data[resultKey].map(result => {
           // extract ID
           const parts = result.url.split('/');
           const id = parts[parts.length - 2];
@@ -59,7 +62,8 @@ export default ({
         // Dispatch Success
         dispatch.pokemon.fetchSuccess({ ...response.data, results: composedResults});
       } catch (err) {
-        dispatch.pokemon.fetchFailed({ error: err });
+        console.error(err)
+        dispatch.pokemon.fetchFailed({ error: `${err}` });
       }
     }
   })

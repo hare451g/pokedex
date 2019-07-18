@@ -83,7 +83,7 @@ export default function ResponsiveDrawer(props) {
       </Grid>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem component="a" href={`/`} button>
           <ListItemText primary="All Pokemon" />
         </ListItem>
       </List>
