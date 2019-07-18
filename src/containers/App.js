@@ -5,7 +5,8 @@ import ListScreen from '../screens/ListScreen';
 function App() {
   return (
     <Router>
-      <Route path="/" component={ListScreen} />
+      <Route path="/:filterType/:slug" component={ListScreen} />
+      <Route path="/pokemon/all" component={ListScreen} />
     </Router>
   );
 }
