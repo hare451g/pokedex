@@ -10,8 +10,8 @@ const PokemonList = ({ results }) => {
   if (results && results.length >= 1) {
     return (
       <List>
-        {results.map(({name, url, id, avatar}) => (
-          <ListItem key={id} button>
+        {results.map(({name, id, avatar}) => (
+          <ListItem key={id} component="a" href={`/${name}`} button>
             <ListItemAvatar>
               <Avatar alt={name} src={avatar}/>
             </ListItemAvatar>

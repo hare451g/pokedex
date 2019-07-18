@@ -17,7 +17,7 @@ export default function PokemonCard({ name, url, id, avatar }) {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea href={`/${name}`}>
         <CardMedia
           component="img"
           alt={name}
