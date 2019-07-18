@@ -2,15 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Paper from '@material-ui/core/Paper';
+import PokemonDetail from '../components/PokemonDetail';
 
 class DetailContainer extends React.Component {
   componentDidMount() {
     const {
       isLoading,
+      fetchPokemonDetails,
+      slug,
     } = this.props;
     
     if (!isLoading) {
-      // do fetch pokemon
+      fetchPokemonDetails({ slug })
     }
   }
 
@@ -18,7 +21,7 @@ class DetailContainer extends React.Component {
     const {
       isLoading,
       error,
-      details,
+      selected,
     } = this.props;
 
     if (error) {
@@ -33,16 +36,22 @@ class DetailContainer extends React.Component {
       );
     }
 
+    if (selected) {
+      return (
+        <PokemonDetail {...selected} />
+      );
+    }
+
     return (
-      <div>Empty .</div>
+      <div>Empty</div>
     );
   }
 }
 
 const mapState = (state) => ({ ...state.pokemon });
 
-const mapDispatch = ({ pokemon: { fetchPokemon } }) => ({
-  fetchPokemon: ({filterType, slug}) => fetchPokemon({filterType, slug}),
+const mapDispatch = ({ pokemon: { fetchPokemonDetails } }) => ({
+  fetchPokemonDetails: ({ slug }) => fetchPokemonDetails({slug}),
 });
 
 export default connect(mapState, mapDispatch)(DetailContainer);
