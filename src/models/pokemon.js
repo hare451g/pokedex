@@ -27,6 +27,13 @@ export default ({
       error: undefined,
     }),
 
+    fetchDetailSuccess: (state, payload) => ({
+      ...state,
+      isLoading: false,
+      error: undefined,
+      selected:  {...payload },
+    }),
+
     fetchFailed: (state, payload) => ({
       ...state,
       isLoading: false,
@@ -73,16 +80,14 @@ export default ({
       try {
         const { slug } = payload;
         
-        if (slug) {
-          let targetUrl = `${BASE_API_URL}`;
-        }
+        let targetUrl = `${BASE_API_URL}`;
         
         targetUrl += `/pokemon/${slug}`
         
         const response = await Axios.get(targetUrl);
         
         // Dispatch Success
-        dispatch.pokemon.fetchSuccess({ ...response.data});
+        dispatch.pokemon.fetchDetailSuccess({ ...response.data});
       } catch (err) {
         console.error(err)
         dispatch.pokemon.fetchFailed({ error: `${err}` });
