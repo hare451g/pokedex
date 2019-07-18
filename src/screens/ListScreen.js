@@ -5,9 +5,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ResponsiveDrawer from '../components/ResponsiveDrawer';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   pokemonGrid: {
     paddingTop: 12,
   }
@@ -21,13 +18,11 @@ const ListScreen = (props) => {
 
   return (
     <div className={classes.root}>
-      <ResponsiveDrawer>
-        <PokemonContainer
-          isSmallScreen={matches}
-          filterType={filterType}
-          slug={slug}
-        />
-      </ResponsiveDrawer>
+      <PokemonContainer
+        isSmallScreen={matches}
+        filterType={filterType}
+        slug={slug}
+      />
     </div>
   );
 }
