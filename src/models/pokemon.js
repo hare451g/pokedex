@@ -47,10 +47,13 @@ export default ({
       
       let targetUrl = `${BASE_API_URL}`;
 
-      const { id, next, filterType, slug } = payload;
+      let { id, next, filterType, slug } = payload;
       if (filterType) {
         targetUrl += `/${filterType}/${slug}`
-      } else if (next) {
+      }
+      
+      if (next) {
+        filterType = 'pokemon-species';
         targetUrl = next;
       }
       
