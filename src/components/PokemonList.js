@@ -6,7 +6,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-const PokemonList = ({ results }) => {
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import { Waypoint } from 'react-waypoint';
+
+
+
+const PokemonList = ({ results, handleNextPage, isLoading, next }) => {
   if (results && results.length >= 1) {
     return (
       <List>
@@ -18,6 +24,15 @@ const PokemonList = ({ results }) => {
             <ListItemText primary={name} />
           </ListItem>
         ))}
+        
+        <Grid justify="center" container>
+          <Grid item>
+            { isLoading &&
+              <CircularProgress />
+            }
+            { next && <Waypoint onEnter={handleNextPage}/>}            
+          </Grid>
+        </Grid>
       </List>
     )
   }

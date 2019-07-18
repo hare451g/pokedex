@@ -1,9 +1,11 @@
 import React from 'react';
 
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Waypoint } from 'react-waypoint';
 import PokemonCard from '../components/PokemonCard';
 
-const PokemonGrid = ({ results }) => {
+const PokemonGrid = ({ results, isLoading, handleNextPage, next }) => {
   if (results && results.length >= 1) {
     return (
       <Grid spacing={2} container>
@@ -12,6 +14,15 @@ const PokemonGrid = ({ results }) => {
             <PokemonCard {...pokemon} />
           </Grid>
         ))}
+
+        <Grid justify="center" container>
+          <Grid item>
+            { isLoading &&
+              <CircularProgress />
+            }
+            { next && <Waypoint onEnter={handleNextPage}/>}
+          </Grid>
+        </Grid>
       </Grid>
     )
   }
