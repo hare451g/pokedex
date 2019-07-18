@@ -3,14 +3,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+import Avatar from '@material-ui/core/Avatar';
+
+import PokemonLogo from '../public/img/pokemon-logo.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    backgroundColor: 'white',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -59,9 +61,12 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  pokemonLogo: {
+    paddingRight: 12,
+  }
 }));
 
-const SearchAppBar = () => {
+const NavigationBar = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -75,26 +80,14 @@ const SearchAppBar = () => {
           >
             <MenuIcon />
           </IconButton>
+          <div className={classes.pokemonLogo}><Avatar alt={'pokemon-logo'} src={PokemonLogo}/></div>
           <Typography className={classes.title} variant="h6" noWrap>
             Pokedex
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-          </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default SearchAppBar;
+export default NavigationBar;
