@@ -6,6 +6,7 @@ export default ({
     isLoading: false,
     error: undefined,
     results: [],
+    details: undefined,
     next: null,
     prev: null,
     count: 0,
@@ -61,6 +62,27 @@ export default ({
         })
         // Dispatch Success
         dispatch.pokemon.fetchSuccess({ ...response.data, results: composedResults});
+      } catch (err) {
+        console.error(err)
+        dispatch.pokemon.fetchFailed({ error: `${err}` });
+      }
+    },
+
+    fetchPokemonDetails: async (payload, state) => {
+      dispatch.pokemon.fetchStart();
+      try {
+        const { slug } = payload;
+        
+        if (slug) {
+          let targetUrl = `${BASE_API_URL}`;
+        }
+        
+        targetUrl += `/pokemon/${slug}`
+        
+        const response = await Axios.get(targetUrl);
+        
+        // Dispatch Success
+        dispatch.pokemon.fetchSuccess({ ...response.data});
       } catch (err) {
         console.error(err)
         dispatch.pokemon.fetchFailed({ error: `${err}` });
