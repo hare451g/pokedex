@@ -10,10 +10,12 @@ class PokemonContainer extends React.Component {
     const {
       isLoading,
       fetchPokemon,
+      filterType='pokemon-species',
+      slug='',
     } = this.props;
     
     if (!isLoading) {
-      fetchPokemon();
+      fetchPokemon({ filterType, slug });
     }
   }
 
@@ -52,7 +54,7 @@ class PokemonContainer extends React.Component {
 const mapState = (state) => ({ ...state.pokemon });
 
 const mapDispatch = ({ pokemon: { fetchPokemon } }) => ({
-  fetchPokemon: () => fetchPokemon({}),
+  fetchPokemon: ({filterType, slug}) => fetchPokemon({filterType, slug}),
 });
 
 export default connect(mapState, mapDispatch)(PokemonContainer);

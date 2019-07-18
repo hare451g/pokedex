@@ -36,20 +36,21 @@ export default ({
   effects: (dispatch) => ({
     fetchPokemon: async (payload, state) => {
       dispatch.pokemon.fetchStart();
-
-      let targetUrl = `${BASE_API_URL}/pokemon`;
-
-      const { id, next, } = payload;
       
-      if (id) {
-        targetUrl += `/${id}/`;
-      } else if (next) {
+      let targetUrl = `${BASE_API_URL}`;
+
+      const { id, next, filterType, slug } = payload;
+      if (filterType) {
+        targetUrl += `/${filterType}/${slug}`
+      } else 
+      
+      if (next) {
         targetUrl = next;
       }
       
       try {
         const response = await Axios.get(targetUrl);
-        const composedResults = response.data.results.map(result => {
+        const composedResults = response.data.pokemon_species.map(result => {
           // extract ID
           const parts = result.url.split('/');
           const id = parts[parts.length - 2];
