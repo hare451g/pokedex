@@ -2,13 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import { Avatar } from '@material-ui/core';
+import PokemonGrid from '../components/PokemonGrid';
+import PokemonList from '../components/PokemonList';
 
-class PokemonList extends React.Component {
+class PokemonContainer extends React.Component {
   componentDidMount() {
     const {
       isLoading,
@@ -38,22 +35,12 @@ class PokemonList extends React.Component {
         <Paper>Loading contents . . .</Paper>
       );
     }
-
+    
     if (results && results.length >= 1) {
-      return (
-        <div>
-          <List>
-            {results.map(({name, url, id, avatar}) => (
-              <ListItem key={id} button>
-                <ListItemAvatar>
-                  <Avatar alt={name} src={avatar}/>
-                </ListItemAvatar>
-                <ListItemText primary={name} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      )
+      if (this.props.isSmallScreen) {
+        return (<PokemonList results={results} />);
+      }
+      return (<PokemonGrid results={results} />);
     }
 
     return (
@@ -68,4 +55,4 @@ const mapDispatch = ({ pokemon: { fetchPokemon } }) => ({
   fetchPokemon: () => fetchPokemon({}),
 });
 
-export default connect(mapState, mapDispatch)(PokemonList);
+export default connect(mapState, mapDispatch)(PokemonContainer);
